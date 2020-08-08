@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>ACTIVATION</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.beckettobrien.btmanagerprefs</string>
+			<key>key</key>
+			<string>enabled</string>
+			<key>label</key>
+			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>com.beckettobrien.btmanagerprefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>CONFIGURATION</string>
+			<key>footerText</key>
+			<string>Changing device names requires restarting Bluetoothd. All other settings should not require a respring or any daemon restart.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>BTMDeviceListController</string>
+			<key>label</key>
+			<string>Devices</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>action</key>
+			<string>didOpenAppListController</string>
+			<key>label</key>
+			<string>Applications</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>OTHER</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>View Source</string>
+			<key>action</key>
+			<string>didOpenSource</string>
+		</dict>
+		<dict> <!--Temporary link for prank: https://www.abc.ca.gov/education/licensee-education/checking-identification/-->
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>Buy Me a Beer</string>
+			<key>action</key>
+			<string>didOpenPrank</string>
+		</dict>
+		<dict> <!--PayPal link: https://www.paypal.me/beckettobrien-->
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>Support Me</string>
+			<key>action</key>
+			<string>didOpenSupport</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>Credits</string>
+			<key>detail</key>
+			<string>BTMCreditsController</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>BTManager+</string>
+</dict>
+</plist>

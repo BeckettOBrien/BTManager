@@ -1,5 +1,17 @@
 #import "BTMDeviceConfigController.h"
 
+@implementation BTMNameEditCell
+    -(void)textFieldDidBeginEditing:(UITextField *)textField {
+        textField.returnKeyType = UIReturnKeyDone;
+    }
+
+    -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+        [self resignFirstResponder];
+        [self.specifier performSetterWithValue:textField.text];
+        return NO;
+    }
+@end
+
 @implementation BTMDeviceConfigController
 
 NSString* mac;
@@ -16,7 +28,7 @@ NSString* currentName;
 			cell:PSEditTextCell
 			edit:nil
     ];
-
+    [nameEdit setProperty:NSClassFromString(@"BTMNameEditCell") forKey:@"cellClass"];
     [specifiers addObject:nameEdit];
 
     PSSpecifier* settingsGroup = [NSClassFromString(@"PSSpecifier") preferenceSpecifierNamed:@"SETTINGS:"
@@ -45,7 +57,7 @@ NSString* currentName;
 
     PSSpecifier* saveGroup = [NSClassFromString(@"PSSpecifier") emptyGroupSpecifier];
     [saveGroup setProperty:@"Save to store name changes. You must restart bluetoothd for changes to take effect. NOTE: You must press return on the keyboard to change the name." forKey:@"footerText"];
-    [specifiers addObject:saveGroup];
+    //[specifiers addObject:saveGroup];
 
     PSSpecifier* saveButton = [NSClassFromString(@"PSSpecifier") preferenceSpecifierNamed:@"Save"
             target:self
@@ -57,7 +69,7 @@ NSString* currentName;
     ];
     saveButton.buttonAction = @selector(save);
     [saveButton setProperty:@2 forKey:@"alignment"];
-    [specifiers addObject:saveButton];
+    //[specifiers addObject:saveButton];
 
     self.specifiers = specifiers;
 
@@ -95,11 +107,11 @@ NSString* currentName;
 
 - (void)changeName:(id)name specifier:(PSSpecifier*)specifier {
     self.currentName = name;
+    [self save];
 }
 
 - (void)save {
     [self saveName:self.currentName forAddress:self.mac];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(NSString*)saveName:(NSString*)name forAddress:(NSString*)mac {
@@ -148,11 +160,6 @@ NSString* currentName;
 -(void)viewDidLoad {
     self.navigationItem.title = [NSString stringWithFormat:@"Device Configuration: %@", self.currentName];
     [super viewDidLoad];
-}
-
--(void)_returnKeyPressed:(NSNotification *)sender {
-    [self.view endEditing:YES];
-    [super _returnKeyPressed:sender];
 }
 
 @end

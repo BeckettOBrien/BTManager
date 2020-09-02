@@ -90,3 +90,6 @@
 @interface MPAVRoutingViewControllerDelegate
 -(void)routingViewController:(id)arg1 didPickRoute:(id)arg2;
 @end
+
+@interface MPAVClippingTableView: UIView
+@end

@@ -9,6 +9,8 @@ NSMutableDictionary* routes;
 MPAVRoute* activeRoute;
 MPAVRoute* previousRoute;
 
+UIView* routingSuperview;
+
 SBApplication* nowPlayingApplication;
 
 void updateAvailableRoutes() {
@@ -61,7 +63,7 @@ static void loadPrefs() {
     id out = %orig;
     if (enabled == 0) {
         return out;
-    }    
+    }
 
     if ([arg1[@"RouteUID"] isEqual:activeRoute.routeUID]) {
         return out;
@@ -84,12 +86,26 @@ static void loadPrefs() {
         return out;
     }
 
+    UIWindow* foundWindow = nil;
+    for (UIWindow* window in [[UIApplication sharedApplication] windows]) {
+        if (window.isKeyWindow) {
+            foundWindow = window;
+            break;
+        }
+    }
+
+    if (routingSuperview) {
+        if (routingSuperview.hidden == NO | [foundWindow class] == NSClassFromString(@"SBTransientOverlayWindow")) {
+            return out;
+        }
+    }
+
     if ([[%c(SBMediaController) sharedInstance] isPlaying]) {
         [[%c(SBMediaController) sharedInstance] togglePlayPauseForEventSource:0];
     }
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Switch to %@", arg1[@"RouteName"]] message:
-                                @"Confirm to switch to this device, cancel to return to original device if available or switch to speakers and stop."
+                                [NSString stringWithFormat:@"Confirm to switch to this device, cancel to return to %@ if available or switch to speakers and stop.", previousRoute.routeName]
                                 preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -108,13 +124,6 @@ static void loadPrefs() {
     [alert addAction:cancel];
     [alert addAction:ok];
 
-    UIWindow* foundWindow = nil;
-    for (UIWindow* window in [[UIApplication sharedApplication] windows]) {
-        if (window.isKeyWindow) {
-            foundWindow = window;
-            break;
-        }
-    }
     [foundWindow.rootViewController presentViewController:alert animated:YES completion:nil];
     
     return out;
@@ -155,6 +164,13 @@ static void loadPrefs() {
     return %orig;
 }
 
+%end
+
+%hook MPAVClippingTableView
+-(void)didMoveToSuperview {
+    routingSuperview = self.superview;
+    %orig;
+}
 %end
 
 %ctor {

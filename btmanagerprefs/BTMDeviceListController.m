@@ -77,7 +77,7 @@ NSString* postNotification;
     defaults = @"com.beckettobrien.btmanagerprefs";
     postNotification = @"com.beckettobrien.btmanagerprefs.settingschanged";
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Restart Bluetoothd" style:UIBarButtonItemStyleDone target:self action:@selector(restartBluetoothd)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(restartBluetoothd)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor systemBlueColor];
 }
 
@@ -94,8 +94,24 @@ NSString* postNotification;
     NSTask *t = [[NSTask alloc] init];
     [t setLaunchPath:@"/usr/bin/killall"];
     [t setArguments:[NSArray arrayWithObjects:@"bluetoothd", nil]];
-    [t launch];
-    [self reloadSpecifiers];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Restart Bluetoothd" message:
+                                @"Confirm to save name changes and restart bluetoothd. WARNING: Any connected devices will be disconnected."
+                                preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            [t launch];
+                            [self reloadSpecifiers];
+                        }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancel];
+    [alert addAction:ok];
+    UIWindow* foundWindow = nil;
+    for (UIWindow* window in [[UIApplication sharedApplication] windows]) {
+        if (window.isKeyWindow) {
+            foundWindow = window;
+            break;
+        }
+    }
+    [foundWindow.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 -(NSString*)getMobileBluetoothDevicesPlistPath {

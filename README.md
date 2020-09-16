@@ -5,10 +5,9 @@
 <a href="https://paypal.me/beckettobrien">
 <img src="https://img.shields.io/badge/Support_Me-PayPal-blue.svg?style=for-the-badge" align="center"></img>
 </a>
-<img src="https://img.shields.io/badge/Download-Coming_Soon-inactive.svg?style=for-the-badge" align="center"></img>
-<!-- <a href="https://chariz.com">
+<a href="https://chariz.com/get/btmanager">
 <img src="https://img.shields.io/badge/Download-Chariz-orange.svg?style=for-the-badge" align="center"></img>
-</a> -->
+</a>
 </p>
 
 ---

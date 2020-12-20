@@ -1,7 +1,7 @@
 export ARCHS = arm64 arm64e
-export SDKVERSION = 13.5
+# export SDKVERSION = 13.5
 #TARGET= iphone:13.0
-export THEOS_DEVICE_IP = 192.168.1.118
+export THEOS_DEVICE_IP = 192.168.1.91
 
 INSTALL_TARGET_PROCESSES = SpringBoard
 

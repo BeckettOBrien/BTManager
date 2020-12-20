@@ -1,6 +1,7 @@
 #import <BTManager.h>
 
 BOOL enabled = NO;
+BOOL appswitchingEnabled = NO;
 NSDictionary* deviceOrder;
 NSDictionary* deviceSettings;
 SBMediaController* mediaController;
@@ -29,6 +30,9 @@ void updateAvailableRoutes() {
 }
 
 void updateActiveRoute() {
+    if (!appswitchingEnabled) {
+        return;
+    }
     mediaController = [%c(SBMediaController) sharedInstance];
     routeController = [mediaController valueForKey:@"_routingController"];
     for (NSString* routeAddress in deviceOrder[nowPlayingApplication.bundleIdentifier] ?: deviceOrder[@"SYSTEM"]) {
@@ -53,6 +57,7 @@ static void loadPrefs() {
     NSMutableDictionary *settings = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.beckettobrien.btmanagerprefs.plist"];
     
     enabled = [[settings objectForKey:@"enabled"] boolValue];
+    appswitchingEnabled = [[settings objectForKey:@"appswitchingenabled"] boolValue];
     deviceOrder = [settings objectForKey:@"deviceOrder"] ?: [[NSDictionary alloc] init];
     deviceSettings = [settings objectForKey:@"deviceSettings"] ?: [[NSDictionary alloc] init];
 }

@@ -62,14 +62,6 @@
 			<key>action</key>
 			<string>didOpenSource</string>
 		</dict>
-		<dict> <!--Temporary link for prank: https://www.abc.ca.gov/education/licensee-education/checking-identification/-->
-			<key>cell</key>
-			<string>PSLinkCell</string>
-			<key>label</key>
-			<string>Buy Me a Beer</string>
-			<key>action</key>
-			<string>didOpenPrank</string>
-		</dict>
 		<dict> <!--PayPal link: https://www.paypal.me/beckettobrien-->
 			<key>cell</key>
 			<string>PSLinkCell</string>

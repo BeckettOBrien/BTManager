@@ -73,15 +73,6 @@ NSArray* appList;
         self.appList = apps;
     }];
 
-	// This segment has been removed for the time being due to scaling issues
-	// UITableView *tableView = [self valueForKey:@"_table"];
-    // tableView.tableHeaderView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/btmanagerprefs.bundle/PrefHeader.png"]];
-	// tableView.tableHeaderView.contentMode = UIViewContentModeScaleAspectFill;
-	// CGRect rect = tableView.tableHeaderView.frame;
-	// rect.size.height = 450;
-	// tableView.tableHeaderView.frame = rect;
-	// tableView.tableHeaderView.frame.size.height = @450;
-
 	NSString *path = @"/var/mobile/Library/Preferences/com.beckettobrien.btmanagerprefs.plist";
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
 	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
@@ -101,10 +92,6 @@ NSArray* appList;
 
 - (void)didOpenSource {
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.github.com/beckettobrien/BTManager"] options:@{} completionHandler:nil];
-}
-
-- (void)didOpenPrank {
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.abc.ca.gov/education/licensee-education/checking-identification/"] options:@{} completionHandler:nil];
 }
 
 - (void)didOpenSupport {

@@ -6,6 +6,20 @@
 	<array>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.beckettobrien.btmanagerprefs</string>
+			<key>key</key>
+			<string>appswitchingenabled</string>
+			<key>label</key>
+			<string>Enable App-Based Switching</string>
+			<key>PostNotification</key>
+			<string>com.beckettobrien.btmanagerprefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>APPLICATIONS</string>

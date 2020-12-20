@@ -46,10 +46,10 @@ NSArray* apps;
 
 -(NSArray*)addSpecifierLinks:(NSArray*)apps toSpecifiers:(NSArray*)specifiers {
 	NSMutableArray* specs = [specifiers mutableCopy];
-	PSSpecifier* defaultPage = specs[1];
+	PSSpecifier* defaultPage = specs[2];
 	[defaultPage setProperty:[UIImage systemImageNamed:@"gear"] forKey:@"iconImage"];
 	defaultPage.buttonAction = @selector(openOrderControllerForSpecifier:);
-	specs[1] = defaultPage;
+	specs[2] = defaultPage;
 	NSMutableArray* appsSorted = [apps mutableCopy];
 	[appsSorted sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES]]];
 	for (SparkAppItem* app in appsSorted) {

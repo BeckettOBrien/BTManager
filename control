@@ -1,7 +1,7 @@
 Package: com.beckettobrien.btmanager+
 Name: BTManager+
 Depends: mobilesubstrate, preferenceloader, com.spark.libsparkapplist
-Version: 1.1.0
+Version: 1.2.0
 Architecture: iphoneos-arm
 Description: A tweak to manage the way applications interface your bluetooth devices
 Maintainer: Beckett O'Brien

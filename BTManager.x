@@ -24,6 +24,9 @@ void updateAvailableRoutes() {
             continue;
         }
         NSString* uid = route.routeUID;
+        if (!uid) {
+            continue;
+        }
         [routes setObject:route forKey:uid];
     }
     activeRoute = [routeController pickedRoute];
@@ -87,7 +90,7 @@ static void loadPrefs() {
     if (!mac) {
         return out;
     }
-    if ([deviceSettings[mac][@"switchConfirm"] isEqual:@0]) {
+    if (!(deviceSettings[mac][@"switchConfirm"] ? [deviceSettings[mac][@"switchConfirm"] boolValue] : NO)) {
         return out;
     }
 
